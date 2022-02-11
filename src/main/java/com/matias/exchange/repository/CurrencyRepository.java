@@ -1,10 +1,10 @@
 package com.matias.exchange.repository;
 
 import com.matias.exchange.model.Currency;
-import org.springframework.data.r2dbc.repository.R2dbcRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
 
-public interface CurrencyRepository extends R2dbcRepository<Currency,Long> {
+public interface CurrencyRepository extends ReactiveCrudRepository<Currency,Long> {
 
     Mono<Currency> findByName(String token);
 

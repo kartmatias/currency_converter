@@ -1,9 +1,7 @@
 package com.matias.exchange;
 
-import com.matias.exchange.model.Currency;
-import com.matias.exchange.model.Login;
-import com.matias.exchange.repository.LoginRepository;
 import com.matias.exchange.service.CurrencyService;
+import com.matias.exchange.service.LoginService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -16,24 +14,20 @@ import java.io.IOException;
 @Component
 public class DataLoader  implements ApplicationRunner {
 
-    private LoginRepository loginRepository;
     private CurrencyService currencyService;
+    private LoginService loginService;
 
     @Autowired
-    public DataLoader(LoginRepository loginRepository, CurrencyService currencyService) {
-        this.loginRepository = loginRepository;
+    public DataLoader(CurrencyService currencyService, LoginService loginService) {
         this.currencyService = currencyService;
+        this.loginService = loginService;
     }
 
 
     @Override
     public void run(ApplicationArguments arguments) {
-        Login novo = Login.builder()
-                .name("Novo Default User")
-                .email("default@gmail.com")
-                .token("123456789")
-                .build();
-        loginRepository.save(novo);
+
+        loginService.create("carlos","kartmatias@gmail.com");
 
         try {
             currencyService.updateCurrency();

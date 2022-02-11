@@ -5,11 +5,14 @@ import com.matias.exchange.service.CurrencyService;
 import lombok.extern.log4j.Log4j2;
 import org.reactivestreams.Publisher;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.net.URI;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 @Log4j2
 @RestController
@@ -25,12 +28,27 @@ public class CurrencyController {
 
     @GetMapping
     public Publisher<Currency> getAll(){
-        try {
-            currencyService.updateCurrency();
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
         return currencyService.all();
+    }
+
+    @GetMapping("/{name}")
+    public Publisher<Currency> getById(@PathVariable("name") String name) {
+        return currencyService.getByName(name);
+    }
+
+    @PostMapping
+    public Publisher<ResponseEntity<Currency>> create(@RequestBody Currency currency) {
+        LocalDate date = LocalDate.now();
+        Instant instant = date.atStartOfDay(ZoneId.of("America/Fortaleza")).toInstant();
+        return currencyService.create(Currency.builder()
+                        .name(currency.getName())
+                        .rate(currency.getRate())
+                        .createdAt(instant)
+                        .build())
+                .map(c -> ResponseEntity.created(URI.create("/currency/"+ c.getName()))
+                        .contentType(mediaType)
+                        .build()
+                );
     }
 
 }

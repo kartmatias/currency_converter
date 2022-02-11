@@ -9,13 +9,16 @@ import lombok.extern.log4j.Log4j2;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.IOException;
+import java.net.URI;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -66,15 +69,14 @@ public class CurrencyService {
             Instant instant = date.atStartOfDay(ZoneId.of("America/Fortaleza")).toInstant();
 
             api.getRates().forEach((k,v) -> {
-                currencyRepository.save(
-                        Currency.builder()
+
+                Mono<Currency> res = this.create(Currency.builder()
                                 .name(k)
                                 .rate(v)
                                 .createdAt(instant)
-                                .build()
-                ).doOnSuccess(
-                        item-> publisher.publishEvent(new CurrencyCreatedEvent(item))
-                ).doOnError(throwable -> log.error(throwable.getMessage()));
+                                .build());
+                log.debug(res);
+
             });
 
         }
@@ -82,4 +84,8 @@ public class CurrencyService {
 
     }
 
+    public Mono<Currency> create(Currency currency) {
+        return currencyRepository.save(currency)
+                .doOnSuccess(item -> publisher.publishEvent(new CurrencyCreatedEvent(item)));
+    }
 }
