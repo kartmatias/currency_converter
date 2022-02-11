@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
