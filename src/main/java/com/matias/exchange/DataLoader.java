@@ -1,5 +1,6 @@
 package com.matias.exchange;
 
+import com.matias.exchange.model.Currency;
 import com.matias.exchange.model.Login;
 import com.matias.exchange.repository.LoginRepository;
 import com.matias.exchange.service.CurrencyService;
@@ -27,12 +28,12 @@ public class DataLoader  implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments arguments) {
-        log.debug(arguments);
-        loginRepository.save(Login.builder()
+        Login novo = Login.builder()
                 .name("Novo Default User")
                 .email("default@gmail.com")
                 .token("123456789")
-                .build());
+                .build();
+        loginRepository.save(novo);
 
         try {
             currencyService.updateCurrency();

@@ -16,7 +16,7 @@ import java.util.Objects;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
- @Builder
+@Builder
 public class Currency implements Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
