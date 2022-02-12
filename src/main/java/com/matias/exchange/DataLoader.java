@@ -27,7 +27,9 @@ public class DataLoader  implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments arguments) {
 
-        loginService.create("carlos","kartmatias@gmail.com");
+        if (loginService.getByEmail("kartmatias@gmail.com").isEmpty()) {
+            loginService.create("carlos","kartmatias@gmail.com");
+        }
 
         try {
             currencyService.updateCurrency();

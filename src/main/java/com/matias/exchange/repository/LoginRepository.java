@@ -1,10 +1,11 @@
 package com.matias.exchange.repository;
 
 import com.matias.exchange.model.Login;
-import org.springframework.data.r2dbc.repository.R2dbcRepository;
-import reactor.core.publisher.Mono;
+import org.springframework.data.repository.CrudRepository;
 
-public interface LoginRepository extends R2dbcRepository<Login, Long> {
-    Mono<Login> findByEmail(String email);
-    Mono<Login> findByToken(String token);
+import java.util.Optional;
+
+public interface LoginRepository extends CrudRepository<Login, Long> {
+    Optional<Login> findByEmail(String email);
+    Optional<Login> findByToken(String token);
 }

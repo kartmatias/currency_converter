@@ -2,12 +2,13 @@ package com.matias.exchange.controller;
 
 import com.matias.exchange.model.Login;
 import com.matias.exchange.service.LoginService;
-import org.reactivestreams.Publisher;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -21,32 +22,32 @@ public class UserController {
     }
 
     @GetMapping
-    public Publisher<Login> getAll() {
+    public List<Login> getAll() {
         return loginService.all();
     }
 
     @GetMapping("/{id}")
-    public Publisher<Login> getById(@PathVariable("id") Long id) {
+    public Optional<Login> getById(@PathVariable("id") Long id) {
         return loginService.getById(id);
     }
 
     @GetMapping("/email/{email}")
-    public Publisher<Login> getByEmail(@PathVariable("email") String email) {
+    public Optional<Login> getByEmail(@PathVariable("email") String email) {
         return loginService.getByEmail(email);
     }
 
     @GetMapping("/token/{token}")
-    public Publisher<Login> getByToken(@PathVariable("token") String token) {
+    public Optional<Login> getByToken(@PathVariable("token") String token) {
         return loginService.getByToken(token);
     }
 
     @PostMapping
-    public Publisher<ResponseEntity<Login>> create(@RequestBody Login login) {
-        return loginService.create(login.getName(), login.getEmail())
-                .map(u -> ResponseEntity.created(URI.create("/user/" + u.getId()))
-                        .contentType(mediaType)
-                        .build()
-                );
+    public ResponseEntity<Login> create(@RequestBody Login login) {
+        Login user = loginService.create(login.getName(), login.getEmail());
+        return ResponseEntity.created(URI.create("/user/" + user.getId()))
+                .contentType(mediaType)
+                .build();
+
     }
 
 }

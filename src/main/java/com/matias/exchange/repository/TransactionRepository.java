@@ -1,7 +1,7 @@
 package com.matias.exchange.repository;
 
 import com.matias.exchange.model.Transaction;
-import org.springframework.data.r2dbc.repository.R2dbcRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface TransactionRepository extends R2dbcRepository<Transaction,Long> {
+public interface TransactionRepository extends CrudRepository<Transaction,Long> {
 }

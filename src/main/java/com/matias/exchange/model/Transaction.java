@@ -22,11 +22,11 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private Long userId;
+    private Long loginId;
     private String currencyInput;
     private String currencyOutput;
-    private BigDecimal amount;
-    private BigDecimal tax;
+    private Double amount;
+    private Double tax;
     @CreatedDate
     private Timestamp createdAt;
 }
