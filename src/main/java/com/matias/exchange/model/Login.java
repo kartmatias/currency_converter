@@ -15,7 +15,7 @@ import javax.persistence.GenerationType;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table("LOGIN")
+@Table
 public class Login {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

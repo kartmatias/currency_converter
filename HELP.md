@@ -23,6 +23,11 @@ These additional references should also help you:
 * [R2DBC Homepage](https://r2dbc.io)
 
 ### Mock API
-npm install -g json-server
-cd 
-json-server --watch db.json
+* npm install -g json-server
+* cd mock-json-api
+* json-server --watch db.json
+
+### Docker postgresql
+* Install docker
+* Install docker-composer
+* Run docker-compose up

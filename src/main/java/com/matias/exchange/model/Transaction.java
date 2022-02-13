@@ -10,7 +10,6 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Data
@@ -22,11 +21,11 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private Long userId;
+    private Long loginId;
     private String currencyInput;
     private String currencyOutput;
-    private BigDecimal amount;
-    private BigDecimal tax;
+    private Double amount;
+    private Double rate;
     @CreatedDate
     private Timestamp createdAt;
 }

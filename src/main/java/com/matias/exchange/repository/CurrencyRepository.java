@@ -1,11 +1,15 @@
 package com.matias.exchange.repository;
 
 import com.matias.exchange.model.Currency;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-import reactor.core.publisher.Mono;
+import org.springframework.data.repository.CrudRepository;
 
-public interface CurrencyRepository extends ReactiveCrudRepository<Currency,Long> {
+import java.sql.Timestamp;
+import java.util.List;
 
-    Mono<Currency> findByName(String token);
+public interface CurrencyRepository extends CrudRepository<Currency,Long> {
+
+    Currency findByName(String name);
+
+    List<Currency> findByCreatedAt(Timestamp createdAt);
 
 }

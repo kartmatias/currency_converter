@@ -12,8 +12,8 @@ CREATE TABLE TRANSACTION
     login_id BIGINT,
     currency_input VARCHAR,
     currency_output VARCHAR,
-    amount NUMERIC(12,2),
-    tax NUMERIC(12,2),
+    amount FLOAT,
+    rate FLOAT,
     created_at TIMESTAMP
 );
 

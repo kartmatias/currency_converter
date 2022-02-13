@@ -11,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import java.time.Instant;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Data
@@ -26,7 +26,7 @@ public class Currency implements Persistable<Long> {
     private String name;
     private Double rate;
     @CreatedDate
-    private Instant createdAt;
+    private Timestamp createdAt;
 
     @Override
     public boolean isNew() {
