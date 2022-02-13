@@ -1,0 +1,230 @@
+_type: export
+__export_format: 4
+__export_date: 2022-02-13T02:26:04.276Z
+__export_source: insomnia.desktop.app:v2021.7.2
+resources:
+  - _id: req_73c3c9fe466d479d8d60fd34742227ea
+    parentId: wrk_21322758d5354789bd15e2dd033d680c
+    modified: 1644636630579
+    created: 1644636232138
+    url: http://localhost:8080/currency
+    name: http://localhost:8080/currency
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_f32d86fb19bc43a5872817031f9940dc
+    authentication: {}
+    metaSortKey: -1644636232138
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_21322758d5354789bd15e2dd033d680c
+    parentId: null
+    modified: 1644636232141
+    created: 1644636040321
+    name: exchange_api
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_7255ed881cd746a498f11f278fc07434
+    parentId: wrk_21322758d5354789bd15e2dd033d680c
+    modified: 1644714568800
+    created: 1644636619143
+    url: http://localhost:8080/currency/BRL
+    name: http://localhost:8080/currency/COD
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_f32d86fb19bc43a5872817031f9940dc
+    authentication: {}
+    metaSortKey: -1644636218149
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c9ddfc2c2051491fa484833ad46fbd7e
+    parentId: wrk_21322758d5354789bd15e2dd033d680c
+    modified: 1644718129957
+    created: 1644636204159
+    url: http://localhost:8080/currency
+    name: http://localhost:8080/currency
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        "name": "BBB",
+        "rate": 2
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_0976812aa14642a7b5e3f14533bd28c3
+    authentication: {}
+    metaSortKey: -1644636204160
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_03cd0e012ebe464ca8b73748f353dbb2
+    parentId: wrk_21322758d5354789bd15e2dd033d680c
+    modified: 1644718157976
+    created: 1644636691671
+    url: http://localhost:8080/currency/convert
+    name: http://localhost:8080/currency/convert
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        "token": "e9a00cb0-304b-4808-b6d6-5f1743cff4ec",
+        "currencyInput": "BND",
+        "currencyOutput": "CHF",
+        "amount"	: 100
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_0976812aa14642a7b5e3f14533bd28c3
+    authentication: {}
+    metaSortKey: -1644636186965
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e096ea2953e8486696e494827b9c225a
+    parentId: wrk_21322758d5354789bd15e2dd033d680c
+    modified: 1644636169770
+    created: 1644636169770
+    url: http://localhost:8080/user
+    name: http://localhost:8080/user
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1644636169770
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_bf135f993b794b75987fe46207841c0f
+    parentId: wrk_21322758d5354789bd15e2dd033d680c
+    modified: 1644638664649
+    created: 1644638658821
+    url: http://localhost:8080/transactions
+    name: http://localhost:8080/transactions
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_00bec8543de140b38f382f33fa1c581e
+    authentication: {}
+    metaSortKey: -1644636118230
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_428e440195f7495f976d5323e7d9bf00
+    parentId: wrk_21322758d5354789bd15e2dd033d680c
+    modified: 1644637010900
+    created: 1644636066690
+    url: http://localhost:8080/user
+    name: http://localhost:8080/user
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        "name": "usuario5",
+        "email": "usuario1@gmail.com"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_68a2ae0ec7b24be8802a7f5e0a59697f
+    authentication: {}
+    metaSortKey: -1644636066690
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_5b43f8292415f8a1ea3af81242ac8fa74c31b6b0
+    parentId: wrk_21322758d5354789bd15e2dd033d680c
+    modified: 1644636040329
+    created: 1644636040329
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1644636040330
+    _type: environment
+  - _id: jar_5b43f8292415f8a1ea3af81242ac8fa74c31b6b0
+    parentId: wrk_21322758d5354789bd15e2dd033d680c
+    modified: 1644636040332
+    created: 1644636040332
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_e22dcf61dd864d33a0c522300a89a980
+    parentId: wrk_21322758d5354789bd15e2dd033d680c
+    modified: 1644636040324
+    created: 1644636040324
+    fileName: exchange_api
+    contents: ""
+    contentType: yaml
+    _type: api_spec
