@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.naming.AuthenticationException;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -67,16 +68,21 @@ public class CurrencyService {
 
             ExchangeApi api = objectMapper.readValue(jsonBody, ExchangeApi.class);
             log.debug(api);
-            //Todo: Transaction
-            currencyRepository.deleteAll();
-            LocalDateTime now = LocalDateTime.now();
-            api.getRates().forEach((k,v) -> {
-                this.create(Currency.builder()
-                                .name(k)
-                                .rate(v)
-                                .createdAt(Timestamp.valueOf(now))
-                                .build());
-            });
+
+            if (currencyRepository.findByCreatedAt(api.getTimestamp()).isEmpty()) {
+
+                currencyRepository.deleteAll();
+                LocalDateTime now = LocalDateTime.now();
+                api.getRates().forEach((k,v) -> {
+                    this.create(Currency.builder()
+                            .name(k)
+                            .rate(v)
+                            .createdAt(api.getTimestamp())
+                            .build());
+                });
+
+            }
+
         }
     }
 
@@ -96,9 +102,9 @@ public class CurrencyService {
                         .currencyInput(currencySource.getName())
                         .currencyOutput(currencyDestination.getName())
                         .amount(requestApi.getAmount())
-                        .tax(requestApi.getAmount() / amountDest)
+                        .rate(requestApi.getAmount() / amountDest)
                         .loginId(login.get().getId())
-                        .createdAt(Timestamp.valueOf(LocalDateTime.now()))
+                        .createdAt(Timestamp.from(Instant.now()))
                 .build());
 
         return ResultApi.builder()
@@ -109,7 +115,7 @@ public class CurrencyService {
                 .currencyOutput(currencyDestination.getName())
                 .amountOutput(amountDest)
                 .rate(requestApi.getAmount() / amountDest)
-                .resultDate(Timestamp.valueOf(LocalDateTime.now()))
+                .resultDate(Timestamp.from(Instant.now()))
                 .build();
     }
 }

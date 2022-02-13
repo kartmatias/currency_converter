@@ -10,7 +10,6 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Data
@@ -26,7 +25,7 @@ public class Transaction {
     private String currencyInput;
     private String currencyOutput;
     private Double amount;
-    private Double tax;
+    private Double rate;
     @CreatedDate
     private Timestamp createdAt;
 }
