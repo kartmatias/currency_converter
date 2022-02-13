@@ -1,10 +1,15 @@
 # Currency Converter
 Currency Converter
 
+* Spring boot
+* Java 11
+* PostgreSQL running on docker
+* json-server
+
+
 ## External API dependency
 http://api.exchangeratesapi.io
 * get token and add into application.properties - exchangeratesapi.key=[your-key]
-
 * for debug you can use json-server to mock api
 
 ### Mock API

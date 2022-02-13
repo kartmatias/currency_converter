@@ -28,12 +28,9 @@ import java.util.stream.StreamSupport;
 public class CurrencyService {
 
     @Value("${exchangeratesapi.key}")
-    private String accessKey;
-
-//    EXTERNAL API
-//    private final String UPDATE_URL = "http://api.exchangeratesapi.io/v1/latest?access_key=%s&format=1";
-//    MOCK API
-    private final String UPDATE_URL = "http://localhost:3000/latest";
+    private String apiKey;
+    @Value("${exchangeratesapi.url}")
+    private String apiUrl;
 
     private final CurrencyRepository currencyRepository;
     private final LoginRepository loginRepository;
@@ -59,7 +56,7 @@ public class CurrencyService {
         final OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
-                .url(String.format(UPDATE_URL, accessKey))
+                .url(String.format(apiUrl, apiKey))
                 .get()
                 .build();
         try (Response response = client.newCall(request).execute()) {
@@ -91,13 +88,16 @@ public class CurrencyService {
     }
 
     public ResultApi convert(RequestApi requestApi) throws AuthenticationException {
+
         Optional<Login> login = loginRepository.findByToken(requestApi.getToken());
+
+        if (login.isEmpty()) throw new AuthenticationException("Token not found");
+
         Currency currencySource = currencyRepository.findByName(requestApi.getCurrencyInput());
         Currency currencyDestination = currencyRepository.findByName(requestApi.getCurrencyOutput());
         Double amountEUR = requestApi.getAmount() / currencySource.getRate();
         Double amountDest = amountEUR * currencyDestination.getRate();
 
-        if (login.isEmpty()) throw new AuthenticationException("Token not found");
         Transaction transaction = transactionRepository.save(Transaction.builder()
                         .currencyInput(currencySource.getName())
                         .currencyOutput(currencyDestination.getName())
